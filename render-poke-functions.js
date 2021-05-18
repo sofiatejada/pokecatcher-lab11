@@ -1,5 +1,6 @@
 import { findById } from './utils.js';
 
+
 const booger = 'CART';
 
 export function getPokedex() {
@@ -55,4 +56,31 @@ export function encounterPokemon(encounteredId) {
     }
     // console.log(currentPokeCart);
     setPokedex(currentPokeCart);
+}
+
+export function getTotalCaptured() {
+    //initialize
+    let total = 0;
+    const cartPokeArray = getPokedex();
+  
+
+    //loop through local storage to collect the number of times captured
+    for (let poke of cartPokeArray) {
+        //so while the loop is looking through all the stuff in cartPokeArray, it's grabbing the values in the captured key and adding them up one by one to the total
+        total += poke.captured;
+    }
+
+    return total;
+}
+
+export function setStorage(unStringyArray) {
+    const stringyArray = JSON.stringify(unStringyArray);
+    localStorage.setItem('STORAGE', stringyArray);
+}
+
+export function getStorage() {
+    const stringyArray = localStorage.getItem('STORAGE');
+    if (!stringyArray) return [];
+    const parsedArray = JSON.parse(stringyArray);
+    return parsedArray;
 }

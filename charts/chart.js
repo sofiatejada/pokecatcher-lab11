@@ -1,12 +1,12 @@
 import { mungeName, mungeCaptured } from './munge.js';
-import { getPokedex } from '../render-poke-functions.js';
+import { getPokedex, getStorage, setPokedex, setStorage } from '../render-poke-functions.js';
 
 const cart = getPokedex();
-console.log(mungeCaptured(cart));
-// console.log(mungeName(cart));
-// console.log(cart);
+const resetButton = document.querySelector('#reset-button ');
+// const storage = [];
+
 var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
+new Chart(ctx, {
     type: 'bar',
     data: {
         labels: mungeName(cart),
@@ -39,4 +39,17 @@ var myChart = new Chart(ctx, {
             }
         }
     }
+});
+
+resetButton.addEventListener('click', () => {
+    //redirect back to home page
+    //place the current cart into storage
+
+    const currentStorage = getStorage();
+    currentStorage.push(cart);
+    
+    console.log();
+    //clear localStorage cart
+    setPokedex([]);
+    window.location.replace('/');
 });
