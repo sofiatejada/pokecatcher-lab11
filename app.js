@@ -1,5 +1,5 @@
 // import functions and grab DOM elements
-import { getPokedex, setPokedex, capturePokemon, encounterPokemon } from './render-poke-functions.js';
+import { capturePokemon, encounterPokemon } from './render-poke-functions.js';
 import { pokedex } from './pokedex.js';
 
 const poke1 = document.querySelector('#poke-radio-1');
@@ -17,7 +17,7 @@ renderPokemon();
 function getRandomPokemon() {
     const randomNumber = Math.floor(Math.random() * pokedex.length);
 
-    const randomPokemon = pokedex.id[randomNumber];
+    const randomPokemon = pokedex[randomNumber];
 
     return randomPokemon;
 }
@@ -53,6 +53,13 @@ function renderPokemon() {
 
 button.addEventListener('click', () => {
 
-    
+    const selectedPoke = document.querySelector(':checked');
+
+    const selectedPokeId = selectedPoke.value;
+
+    capturePokemon(selectedPokeId);
+
+    renderPokemon();
+
 
 });
