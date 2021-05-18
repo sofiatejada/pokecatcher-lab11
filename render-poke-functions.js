@@ -84,3 +84,28 @@ export function getStorage() {
     const parsedArray = JSON.parse(stringyArray);
     return parsedArray;
 }
+
+export function createStorage() {
+    const currentStorage = getStorage();
+    const currentCart = getPokedex();
+    const results = [];
+    if (currentStorage) {
+
+        for (let poke of currentCart) {
+            const data = findById(currentCart, poke.id);
+            const prettyBox = [];
+            const captured = data.captured;
+            const ident = data.id;
+            prettyBox.push(captured, ident);
+            results.push(prettyBox);
+        }
+    } else {
+        for (let poke of currentCart) {
+
+            const data = findById(currentCart, poke.id);
+            const newStorage = { id: data.id, captured: 0 };
+            results.push(newStorage);
+        }
+    }
+    setStorage(results);
+}

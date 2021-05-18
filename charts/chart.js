@@ -1,5 +1,5 @@
 import { mungeName, mungeCaptured } from './munge.js';
-import { getPokedex, getStorage, setPokedex, setStorage } from '../render-poke-functions.js';
+import { getPokedex, setPokedex } from '../render-poke-functions.js';
 
 const cart = getPokedex();
 const resetButton = document.querySelector('#reset-button ');
@@ -44,12 +44,7 @@ new Chart(ctx, {
 resetButton.addEventListener('click', () => {
     //redirect back to home page
     //place the current cart into storage
-
-    const currentStorage = getStorage();
-    currentStorage.push(cart);
-    
-    console.log();
     //clear localStorage cart
     setPokedex([]);
-    window.location.replace('/');
+    window.location.replace('../');
 });
