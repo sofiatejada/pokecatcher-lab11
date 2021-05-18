@@ -1,34 +1,41 @@
-import findById from './utils.js';
+import { findById } from './utils.js';
 
 const booger = 'CART';
 
 export function getPokedex() {
+
+    // console.log(localStorage.getItem('CART'));
     const stringyCart = localStorage.getItem(booger);
 
-    const parsedCart = JSON.parse(stringyCart);
-
-    if (parsedCart) {
+    if (stringyCart) {
+        const parsedCart = JSON.parse(stringyCart);
         return parsedCart;
-    } else return [];
+    } else { 
+        return [];
+    }
+    
 
 }
 
 export function setPokedex(newPokedexArray) {
     const stringySelection = JSON.stringify(newPokedexArray);
+
     localStorage.setItem(booger, stringySelection);
 
 }
 
 export function capturePokemon(selection) {
-    const pokeCart = getPokedex();
-    // grab the selected pokemon with findById
-    const selectedPokemon = findById(pokeCart, selection);
-    //matching selection and pokedex
-    if (selectedPokemon.id === pokeCart.id) {
-        selectedPokemon.captured++;
-    }
 
-    setPokedex(selectedPokemon);
+    const numberSelection = Number(selection);
+    const pokeCart = getPokedex();
+
+    const selectedPokemon = findById(pokeCart, numberSelection);
+    // console.log(pokeCart, numberSelection);
+    // console.log(selectedPokemon);
+
+    selectedPokemon.captured++;
+
+    setPokedex(pokeCart);
 
 }
 
@@ -36,14 +43,16 @@ export function encounterPokemon(encounteredId) {
 
     const currentPokeCart = getPokedex();
 
-    const matchingPokemon = findById(booger, encounteredId);
+    const matchingPokemon = findById(currentPokeCart, encounteredId);
 
     // matches currentpokecart with mainpokedex
     if (matchingPokemon) {
-        matchingPokemon.encounter++;
+        matchingPokemon.encountered++;
+        // console.log(matchingPokemon);
     } else {
-        const newPokeItem = { id: matchingPokemon.id, captured: 0, encountered: 1 };
+        const newPokeItem = { id: encounteredId, captured: 0, encountered: 1 };
         currentPokeCart.push(newPokeItem);
     }
-
+    // console.log(currentPokeCart);
+    setPokedex(currentPokeCart);
 }
