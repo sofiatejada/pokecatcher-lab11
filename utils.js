@@ -1,4 +1,4 @@
-export function findById(pokedexArray, selectionId) {
+export default function findById(pokedexArray, selectionId) {
     for (let pokemon of pokedexArray) {
         if (pokemon.id === selectionId) {
             return pokemon;

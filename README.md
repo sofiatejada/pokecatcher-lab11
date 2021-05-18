@@ -39,6 +39,7 @@
     - if a match is found by doing array.id, return that pokemon's whole object
     - if pokemon in pokedex, pokemon.id === selected.id, if it's true, return that object, return pokemon
     - if it doesn't find a thing, return null
+    DONE
 
     capturePokemon function
         - selection, pokedex are the parameters
