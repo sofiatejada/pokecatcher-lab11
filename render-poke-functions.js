@@ -26,10 +26,12 @@ export function setPokedex(newPokedexArray) {
 
 export function capturePokemon(selection) {
 
+    const numberSelection = Number(selection);
     const pokeCart = getPokedex();
 
-    const selectedPokemon = findById(pokeCart, selection);
-    console.log(pokeCart);
+    const selectedPokemon = findById(pokeCart, numberSelection);
+    // console.log(pokeCart, numberSelection);
+    // console.log(selectedPokemon);
 
     selectedPokemon.captured++;
 
@@ -46,11 +48,11 @@ export function encounterPokemon(encounteredId) {
     // matches currentpokecart with mainpokedex
     if (matchingPokemon) {
         matchingPokemon.encountered++;
-        console.log(matchingPokemon);
+        // console.log(matchingPokemon);
     } else {
         const newPokeItem = { id: encounteredId, captured: 0, encountered: 1 };
         currentPokeCart.push(newPokeItem);
     }
-    console.log(currentPokeCart);
+    // console.log(currentPokeCart);
     setPokedex(currentPokeCart);
 }

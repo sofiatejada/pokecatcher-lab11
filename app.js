@@ -9,7 +9,7 @@ const pokeImage1 = document.querySelector('#poke-image-1');
 const pokeImage2 = document.querySelector('#poke-image-2');
 const pokeImage3 = document.querySelector('#poke-image-3');
 const button = document.querySelector('button');
-console.log(poke1, poke2, poke3, pokeImage1, pokeImage2, pokeImage3, button);
+// console.log(poke1, poke2, poke3, pokeImage1, pokeImage2, pokeImage3, button);
 
 // on LOAD
 
@@ -38,7 +38,7 @@ function renderPokemon() {
         pokemon3 = getRandomPokemon();
     }
     
-    console.log(pokemon1, pokemon2, pokemon3);
+    // console.log(pokemon1, pokemon2, pokemon3);
     encounterPokemon(pokemon1.id);
     encounterPokemon(pokemon2.id);
     encounterPokemon(pokemon3.id);
@@ -61,7 +61,7 @@ button.addEventListener('click', () => {
     const selectedPoke = document.querySelector(':checked');
 
     const selectedPokeId = selectedPoke.value;
-    console.log(selectedPokeId);
+    // console.log(selectedPokeId);
     capturePokemon(selectedPokeId);
 
     renderPokemon();
