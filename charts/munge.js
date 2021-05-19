@@ -18,6 +18,8 @@ export function mungeName(cartPokeArray) {
 
 }
 
+export function mungeEncountered
+
 export function mungeCaptured(cartPokeArray) {
     const results = [];
     for (let poke of pokedex) {

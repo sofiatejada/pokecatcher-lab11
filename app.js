@@ -1,5 +1,5 @@
 // import functions and grab DOM elements
-import { capturePokemon, createStorage, encounterPokemon, getTotalCaptured } from './render-poke-functions.js';
+import { capturePokemon, encounterPokemon, getTotalCaptured } from './render-poke-functions.js';
 import { pokedex } from './pokedex.js';
 
 const poke1 = document.querySelector('#poke-radio-1');
@@ -70,7 +70,7 @@ button.addEventListener('click', () => {
     
     const totalCaptured = getTotalCaptured();
     if (totalCaptured >= 10) {
-        createStorage();
+        // createStorage();
         
         window.location.replace('./charts');
     } else {

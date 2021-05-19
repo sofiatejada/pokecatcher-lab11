@@ -10,12 +10,12 @@ export function getPokedex() {
 
     if (stringyCart) {
         const parsedCart = JSON.parse(stringyCart);
+        // console.log(parsedCart);
         return parsedCart;
     } else { 
         return [];
     }
     
-
 }
 
 export function setPokedex(newPokedexArray) {
@@ -29,13 +29,17 @@ export function capturePokemon(selection) {
 
     const numberSelection = Number(selection);
     const pokeCart = getPokedex();
+    const pokeStorage = getStorage();
 
     const selectedPokemon = findById(pokeCart, numberSelection);
+    const pokeInStorage = findById(pokeStorage, numberSelection);
     // console.log(pokeCart, numberSelection);
     // console.log(selectedPokemon);
 
+    pokeInStorage.captured++;
     selectedPokemon.captured++;
 
+    setStorage(pokeStorage);
     setPokedex(pokeCart);
 
 }
@@ -43,8 +47,10 @@ export function capturePokemon(selection) {
 export function encounterPokemon(encounteredId) {
 
     const currentPokeCart = getPokedex();
+    const currentPokeStorage = getStorage();
 
     const matchingPokemon = findById(currentPokeCart, encounteredId);
+    const matchingPokeInStorage = findById(currentPokeStorage, encounteredId);
 
     // matches currentpokecart with mainpokedex
     if (matchingPokemon) {
@@ -56,6 +62,17 @@ export function encounterPokemon(encounteredId) {
     }
     // console.log(currentPokeCart);
     setPokedex(currentPokeCart);
+    
+    // matches currentpokecart with mainpokedex
+    if (matchingPokeInStorage) {
+        matchingPokeInStorage.encountered++;
+        // console.log(matchingPokeInStorage);
+    } else {
+        const newPokeItem = { id: encounteredId, captured: 0, encountered: 1 };
+        currentPokeStorage.push(newPokeItem);
+    }
+    // console.log(currentPokeCart);
+    setStorage(currentPokeStorage);
 }
 
 export function getTotalCaptured() {
@@ -85,27 +102,51 @@ export function getStorage() {
     return parsedArray;
 }
 
-export function createStorage() {
-    const currentStorage = getStorage();
-    const currentCart = getPokedex();
-    const results = [];
-    if (currentStorage) {
+// export function createStorage() {
+//     const currentStorage = getStorage();
+//     const currentCart = getPokedex();
+//     const results = [];
 
-        for (let poke of currentCart) {
-            const data = findById(currentCart, poke.id);
-            const prettyBox = [];
-            const captured = data.captured;
-            const ident = data.id;
-            prettyBox.push(captured, ident);
-            results.push(prettyBox);
-        }
-    } else {
-        for (let poke of currentCart) {
+    //an item in currentStorage with the same ID as an item in currentCart: for currentStorage.captured, add currentCart.captured
 
-            const data = findById(currentCart, poke.id);
-            const newStorage = { id: data.id, captured: 0 };
-            results.push(newStorage);
-        }
-    }
-    setStorage(results);
-}
+//     if (currentStorage) {
+
+//         for (let item of currentCart) {
+            
+//             const capturedItem = findById(currentCart, item.id);
+//             console.log(capturedItem);
+//             const currentCartCaptured = capturedItem.captured;
+
+//             for (let otherItem of currentStorage) {
+//                 if (otherItem.id === item.id) {
+
+//                     const capturedOtherItem = findById(currentStorage, item.id);
+    
+//                     const currentStorageCaptured = capturedOtherItem.captured;
+    
+//                     const addedCaptures = currentStorageCaptured + currentCartCaptured;
+    
+//                     console.log(addedCaptures);
+//                     // return addedCaptures;
+//                 }
+
+//             }
+
+//         } results.push()
+//     } else {
+//         for (let poke of currentCart) {
+//             const data = findById(currentCart, poke.id);
+//             const prettyBox = [];
+//             const captured = data.captured;
+//             const encountered = data.encountered;
+//             const ident = data.id;
+//             prettyBox.push(captured, encountered, ident);
+//             results.push(prettyBox);
+
+//         }
+//     }
+//     setStorage(results);
+// }
+// const data = findById(currentCart, poke.id);
+// const newStorage = { id: data.id, captured: 0, encountered:0 };
+// results.push(newStorage);
