@@ -1,5 +1,5 @@
 // import functions and grab DOM elements
-import { capturePokemon, encounterPokemon } from './render-poke-functions.js';
+import { capturePokemon, encounterPokemon, getTotalCaptured } from './render-poke-functions.js';
 import { pokedex } from './pokedex.js';
 
 const poke1 = document.querySelector('#poke-radio-1');
@@ -61,10 +61,23 @@ button.addEventListener('click', () => {
     const selectedPoke = document.querySelector(':checked');
 
     const selectedPokeId = selectedPoke.value;
-    // console.log(selectedPokeId);
+
     capturePokemon(selectedPokeId);
 
-    renderPokemon();
+    
+
+    // we want it to redirect if you have captrured 10 pokemon
+    
+    const totalCaptured = getTotalCaptured();
+    if (totalCaptured >= 10) {
+        // createStorage();
+        
+        window.location.replace('./charts');
+    } else {
+        renderPokemon();
+
+    }
+
 
 
 });
