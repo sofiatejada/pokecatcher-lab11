@@ -22,7 +22,6 @@ export function mungeEncountered(cartPokeArray) {
     const results = [];
     for (let poke of pokedex) {
         const data = findById(cartPokeArray, poke.id);
-        console.log(data.encountered);
         results.push(data.encountered);
 
         if (!data) {
